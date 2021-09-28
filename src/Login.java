@@ -1,38 +1,51 @@
-import com.mysql.cj.protocol.Resultset;
-import javafx.scene.control.PasswordField;
-
 import javax.swing.*;
-import javax.xml.transform.Result;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-
+@SuppressWarnings("All")
 public class Login extends JFrame implements ActionListener {
+
+    Conn c2 = new Conn();
 
     private JLabel username,password;
     private TextField e_username;
     private JPasswordField e_password;
     private JButton login,sign_up,forgot_pass;
     private JFrame frame;
+
     private JLabel back_image;
     private JPanel panel;
 
 
-    public Login() {
+
+    public Login(){
 
         frame = new JFrame();
         frame.setTitle("Bank Management System");
-        frame.setSize(900, 600);
+        frame.setSize(900,600);
         frame.setResizable(false);
+        frame.setLayout(null);
+
+        ImageIcon image = new ImageIcon("../Images/Login_background.png");
+        JLabel label = new JLabel(image);
+
+
+        frame.getContentPane().setBackground(Color.decode("#eab676"));
+
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 
 
         //making window to appear in the centre of screen
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()));
-        int y = (int) ((dimension.getHeight() - frame.getHeight()));
-        frame.setLocation(x / 2, y / 2);
-
+        int x = (int) ((dimension.getWidth()-frame.getWidth()));
+        int y = (int) ((dimension.getHeight()-frame.getHeight() ));
+        frame.setLocation(x/2,y/2);
 
         //////////////////////////////////////////////////
 
@@ -82,50 +95,94 @@ public class Login extends JFrame implements ActionListener {
         sign_up.setBounds(418, 430,280,42);
         frame.add(sign_up);
 
-        forgot_pass = new JButton("Forgot password?");
-        forgot_pass.setFont(new Font("arial",Font.BOLD,27));
-        forgot_pass.setForeground(Color.ORANGE);
-        forgot_pass.setBackground(Color.white);
-        forgot_pass.setBounds(418, 490,280,42);
-        frame.add(forgot_pass);
+//        forgot_pass = new JButton("Forgot password?");
+//        forgot_pass.setFont(new Font("arial",Font.BOLD,27));
+//        forgot_pass.setForeground(Color.ORANGE);
+//        forgot_pass.setBackground(Color.white);
+//        forgot_pass.setBounds(418, 490,280,42);
+//        frame.add(forgot_pass);
 
 
         // adding actionlistener
         login.addActionListener(this);
         sign_up.addActionListener(this);
-        forgot_pass.addActionListener(this);
+//        forgot_pass.addActionListener(this);
 
 
 
 
-        getContentPane().setBackground(Color.white);
+//        getContentPane().setBackground(Color.blue);
+//        setBackground(Color.blue);
+//        frame.add(label);
 
-        frame.setLayout(null);
+
         frame.setVisible(true);
 
 
     }
 
+    private boolean check() throws SQLException {
+        if (username.getText().equals(null) || password.getText().equals(null)){
+            JOptionPane.showMessageDialog(null,"Empty field");
+            return false;
+        }
+        String user = username.getText();
+        String pass = password.getText();
+        Connection connection = c2.getconn();
+        PreparedStatement checkUser = connection.prepareStatement("SELECT email from user_info WHERE email = ? and password = ?");
+        checkUser.setString(1,user);
+        checkUser.setString(2,pass);
+        ResultSet resultSet = checkUser.executeQuery();
+        if (resultSet.next()){
+            resultSet.close();
+            checkUser.close();
+            return true;
+        }
+        JOptionPane.showMessageDialog(null,"User Doesnot exist");
+        return false;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
+//        if( conn!=null){
 
 
         try{
 
-            conn c1= new conn();
-            String username = e_username.getText();
-            String password = e_password.getSelectedText();
-            String q = "select * from user_info where username = '"+username+"' and password = '"+password+ "'";
-            Resultset rs = (Resultset) c1.s.executeQuery(q);
+
+
 
             if (e.getSource()==login){
+                if (check()){
+                    System.out.println(1);
 
+                }
+
+//                for (int row =0; rr<=7;)
+
+
+//                    ResultSet result=st.executeQuery("SELECT email ms.customer_details WHERE email="+c+';');
+//
+//                if(a!="" && b!="" && c!="" && d!="" && add_e!="" && f!="")
+//                {
+//                    if(result==null)
+//                    {
+//                        st.executeUpdate("INSERT INTO customer_details(fullname,username,email,password,address,contact) VALUES("+a+','+b+','+c+','+f+','+add_e+','+d+';');
+//                        JOptionPane.showMessageDialog(null,"Registered successfully!","Success",JOptionPane.INFORMATION_MESSAGE);
+//                    }
+//                    else if(c==result.getString(1));
+//                    {
+//                        JOptionPane.showMessageDialog(null,"Entry Already Exists!","Failed!",JOptionPane.INFORMATION_MESSAGE);
+//                    }
+//                }
 
             }
             else if(e.getSource()==sign_up){
-                new sign_up().setVisible(true);
+                frame.dispose();
                 frame.setVisible(false);
+
+                new sign_up();
 
 
             }
@@ -141,7 +198,9 @@ public class Login extends JFrame implements ActionListener {
 
 
 
-
+    public static boolean getuser(){
+        return true;
+    }
 
 
 
@@ -154,5 +213,3 @@ public class Login extends JFrame implements ActionListener {
 
 
 }
-
-
