@@ -90,3 +90,75 @@ public class sign_up extends JFrame implements ActionListener {
         pass.setBorder(BorderFactory.createLineBorder(Color.white,6,true));
         signup_frame.add(pass);
 
+
+
+        // BUTTON=================================================================================================================
+        //Confirm button
+        confirm_reg = new JButton(" Confirm Registration ");
+        confirm_reg.setFont(new Font("Arial", Font.BOLD, 30));
+        confirm_reg.setBounds(bx, by, 350, 50);
+        confirm_reg.setBorder(BorderFactory.createLineBorder(Color.white, 6, true));
+        signup_frame.add(confirm_reg);
+
+        //Back button
+        Back = new JButton(" Back ");
+        Back.setFont(new Font("Arial", Font.BOLD, 30));
+        Back.setBounds(bx, by + 55, 350, 50);
+        Back.setBorder(BorderFactory.createLineBorder(Color.white, 6, true));
+        signup_frame.add(Back);
+
+        //Exit button
+        Exit = new JButton(" Exit ");
+        Exit.setFont(new Font("Arial", Font.BOLD, 30));
+        Exit.setBounds(bx, by + 110, 350, 50);
+        Exit.setBorder(BorderFactory.createLineBorder(Color.white, 6, true));
+        signup_frame.add(Exit);
+
+        // Textfield=================================================================================================================================
+
+
+        e_fullName = new JTextField();
+        e_fullName.setBounds(valx + 230, valy, 480, 48);
+        e_fullName.setFont(new Font("Arial", Font.BOLD, 30));
+        signup_frame.add(e_fullName);
+
+
+        e_userName = new JTextField();
+        e_userName.setBounds(valx + 230, valy + 60, 480, 48);
+        e_userName.setFont(new Font("Arial", Font.BOLD, 30));
+        signup_frame.add(e_userName);
+
+
+        e_email = new JTextField();
+        e_email.setBounds(valx + 230, valy + 120, 480, 48);
+        e_email.setFont(new Font("Arial", Font.BOLD, 30));
+        signup_frame.add(e_email);
+
+        e_contact = new JTextField();
+        e_contact.setBounds(valx + 230, valy + 180, 480, 48);
+        e_contact.setFont(new Font("Arial", Font.BOLD, 30));
+        signup_frame.add(e_contact);
+
+        e_add = new JTextField();
+        e_add.setBounds(valx + 230, valy + 240, 480, 48);
+        e_add.setFont(new Font("Arial", Font.BOLD, 30));
+        signup_frame.add(e_add);
+
+
+        e_pass = new JTextField();
+        e_pass.setBounds(valx + 230, valy + 300, 480, 48);
+        e_pass.setFont(new Font("Arial", Font.BOLD, 30));
+        signup_frame.add(e_pass);
+
+
+        //addingactionlistner================================================================================================
+        confirm_reg.addActionListener(this);
+        Back.addActionListener(this);
+        Exit.addActionListener(this);
+
+
+        signup_frame.setLayout(null);
+        signup_frame.setVisible(true);
+
+
+    }
