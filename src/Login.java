@@ -1,4 +1,4 @@
-
+import com.mysql.cj.protocol.Resultset;
 import javafx.scene.control.PasswordField;
 
 import javax.swing.*;
@@ -89,5 +89,70 @@ public class Login extends JFrame implements ActionListener {
         forgot_pass.setBounds(418, 490,280,42);
         frame.add(forgot_pass);
 
+
+        // adding actionlistener
+        login.addActionListener(this);
+        sign_up.addActionListener(this);
+        forgot_pass.addActionListener(this);
+
+
+
+
+        getContentPane().setBackground(Color.white);
+
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+
+
+        try{
+
+            conn c1= new conn();
+            String username = e_username.getText();
+            String password = e_password.getSelectedText();
+            String q = "select * from user_info where username = '"+username+"' and password = '"+password+ "'";
+            Resultset rs = (Resultset) c1.s.executeQuery(q);
+
+            if (e.getSource()==login){
+
+
+            }
+            else if(e.getSource()==sign_up){
+                new sign_up().setVisible(true);
+                frame.setVisible(false);
+
+
+            }
+
+
+
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+    public static  void main( String [] args){
+        new Login();
+
+
+    }
+
+
+
+}
 
 
