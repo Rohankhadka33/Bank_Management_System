@@ -169,7 +169,6 @@ public class Login extends JFrame implements ActionListener {
 
             if (e.getSource()==login){
                 if (check()){
-                    JOptionPane.showMessageDialog(null,"Sucessful Login!");
                     String em = e_email.getText();
                     String pass= e_password.getText();
 
