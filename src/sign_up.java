@@ -42,6 +42,8 @@ public class sign_up extends JFrame implements ActionListener {
         signup_frame.setSize(900, 600);
         signup_frame.setResizable(false);
 
+        signup_frame.getContentPane().setBackground(Color.decode("#CAB525"));
+
         //putting the window in centre of the screen.
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - signup_frame.getWidth()));
@@ -55,6 +57,7 @@ public class sign_up extends JFrame implements ActionListener {
         fullName.setFont(new Font("Arial", Font.BOLD, 30));
         fullName.setBounds(valx, valy, 190, 50);
         fullName.setBorder(BorderFactory.createLineBorder(Color.white, 6, true));
+        fullName.setBackground(Color.decode("#76655B"));
         signup_frame.add(fullName);
 
         //label for username
@@ -183,7 +186,6 @@ public class sign_up extends JFrame implements ActionListener {
 
         boolean bol = !Null.equals(a) && !Null.equals(b) && !Null.equals(c) && !Null.equals(d) && !Null.equals(add_e)
                 && !Null.equals(f);
-        System.out.println(bol);
 
 
 
@@ -256,7 +258,7 @@ public class sign_up extends JFrame implements ActionListener {
         else if (e.getSource() == Back) {
             signup_frame.setVisible(false);
             signup_frame.dispose();
-            new Login().setVisible(true);
+            new Login();
 
         }
 
@@ -264,6 +266,10 @@ public class sign_up extends JFrame implements ActionListener {
             signup_frame.dispose();
             signup_frame.setVisible(false);
         }
+    }
+
+    public static void main(String[] args) {
+        new sign_up();
     }
 }
 

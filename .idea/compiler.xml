@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Bank_Management_System" target="16" />
+      <module name="demo" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -12,14 +12,21 @@ public class Login extends JFrame implements ActionListener {
 
     Conn c2 = new Conn();
 
-    private JLabel username,password;
-    private TextField e_username;
+    private JLabel email,password;
+    private TextField e_email;
     private JPasswordField e_password;
     private JButton login,sign_up,forgot_pass;
-    private JFrame frame;
+    public JFrame frame;
 
     private JLabel back_image;
     private JPanel panel;
+
+
+
+    public void fr(){
+        frame.setVisible(false);
+
+    }
 
 
 
@@ -30,10 +37,6 @@ public class Login extends JFrame implements ActionListener {
         frame.setSize(900,600);
         frame.setResizable(false);
         frame.setLayout(null);
-
-        ImageIcon image = new ImageIcon("../Images/Login_background.png");
-        JLabel label = new JLabel(image);
-
 
         frame.getContentPane().setBackground(Color.decode("#eab676"));
 
@@ -50,28 +53,29 @@ public class Login extends JFrame implements ActionListener {
         //////////////////////////////////////////////////
 
         //label for username
-        username = new JLabel(" Username: ");
-        username.setBounds(180, 210,170,50);
-        username.setForeground(new Color(112,112,112));
-        username.setBackground(Color.blue);
-        username.setBorder(BorderFactory.createLineBorder(Color.white,5,true));
-        username.setFont(new Font("Arial",Font.BOLD,28));
-        frame.add(username);
+        email = new JLabel(" Email: ");
+        email.setFont(new Font("arial",Font.BOLD,28));
+        email.setForeground(Color.black);
+        email.setBackground(Color.white);
+        email.setBorder(BorderFactory.createLineBorder(Color.white,5,true));
+        email.setBounds(180, 210,170,50);
+        frame.add(email);
+
 
         //label for passsword
         password = new JLabel(" Password: ");
         password.setBounds(180, 280,170,50);
         password.setForeground(new Color(112,112,112));
-        password.setBackground(Color.blue);
+        password.setForeground(Color.black);
         password.setBorder(BorderFactory.createLineBorder(Color.white,5,true));
         password.setFont(new Font("Arial",Font.BOLD,28));
         frame.add(password);
 
         //Textfield for username
-        e_username = new TextField();
-        e_username.setBounds(410, 210,300,50);
-        e_username.setFont(new Font("Arial",Font.BOLD,30));
-        frame.add(e_username);
+        e_email = new TextField();
+        e_email.setBounds(410, 210,300,50);
+        e_email.setFont(new Font("Arial",Font.BOLD,30));
+        frame.add(e_email);
 
         //passwordfield for password
         e_password = new JPasswordField();
@@ -95,25 +99,15 @@ public class Login extends JFrame implements ActionListener {
         sign_up.setBounds(418, 430,280,42);
         frame.add(sign_up);
 
-//        forgot_pass = new JButton("Forgot password?");
-//        forgot_pass.setFont(new Font("arial",Font.BOLD,27));
-//        forgot_pass.setForeground(Color.ORANGE);
-//        forgot_pass.setBackground(Color.white);
-//        forgot_pass.setBounds(418, 490,280,42);
-//        frame.add(forgot_pass);
 
 
         // adding actionlistener
         login.addActionListener(this);
         sign_up.addActionListener(this);
-//        forgot_pass.addActionListener(this);
 
 
 
 
-//        getContentPane().setBackground(Color.blue);
-//        setBackground(Color.blue);
-//        frame.add(label);
 
 
         frame.setVisible(true);
@@ -122,25 +116,42 @@ public class Login extends JFrame implements ActionListener {
     }
 
     private boolean check() throws SQLException {
-        if (username.getText().equals(null) || password.getText().equals(null)){
-            JOptionPane.showMessageDialog(null,"Empty field");
+        String em= e_email.getText();
+        String pa= e_password.getText();
+        String Null ="";
+
+        if (em.equals(Null) || pa.equals(Null)) {
+            JOptionPane.showMessageDialog(null, "Empty field");
+            return false;
+        } else {
+            String user = e_email.getText();
+            String pass = e_password.getText();
+            Connection connection = c2.getconn();
+            PreparedStatement checkUser = connection.prepareStatement("SELECT email from user_info WHERE email = ? and password = ?");
+            checkUser.setString(1, user);
+            checkUser.setString(2, pass);
+            ResultSet resultSet = checkUser.executeQuery();
+            if (resultSet.next()) {
+                resultSet.close();
+                checkUser.close();
+                return true;
+            }
+            JOptionPane.showMessageDialog(null, "User Doesnot exist");
             return false;
         }
-        String user = username.getText();
-        String pass = password.getText();
-        Connection connection = c2.getconn();
-        PreparedStatement checkUser = connection.prepareStatement("SELECT email from user_info WHERE email = ? and password = ?");
-        checkUser.setString(1,user);
-        checkUser.setString(2,pass);
-        ResultSet resultSet = checkUser.executeQuery();
-        if (resultSet.next()){
-            resultSet.close();
-            checkUser.close();
-            return true;
-        }
-        JOptionPane.showMessageDialog(null,"User Doesnot exist");
-        return false;
     }
+    public String user_email(){
+        return this.e_email.getText();
+    }
+
+    public String user_password(){
+        return this.e_password.getSelectedText();
+    }
+
+
+
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -155,7 +166,11 @@ public class Login extends JFrame implements ActionListener {
 
             if (e.getSource()==login){
                 if (check()){
-                    System.out.println(1);
+                    JOptionPane.showMessageDialog(null,"Sucessful Login!");
+                    frame.setVisible(false);
+                    new Dashboard();
+
+
 
                 }
 
@@ -186,6 +201,9 @@ public class Login extends JFrame implements ActionListener {
 
 
             }
+            else{
+                frame.setVisible(false);
+            }
 
 
 
@@ -198,18 +216,14 @@ public class Login extends JFrame implements ActionListener {
 
 
 
-    public static boolean getuser(){
-        return true;
-    }
-
-
-
-    public static  void main( String [] args){
-        new Login();
-
+    public static void main(String[] args) {
+        Login login = new Login();
 
     }
-
-
-
 }
+
+
+
+
+
+
