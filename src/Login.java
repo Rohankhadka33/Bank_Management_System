@@ -12,7 +12,7 @@ public class Login extends JFrame implements ActionListener {
 
     Conn c2 = new Conn();
 
-    private JLabel email,password;
+    private JLabel email,password,welc;
     private TextField e_email;
     private JPasswordField e_password;
     private JButton login,sign_up,forgot_pass;
@@ -41,6 +41,16 @@ public class Login extends JFrame implements ActionListener {
         frame.getContentPane().setBackground(Color.decode("#eab676"));
 
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+        //Welcoming user
+
+        String a= "Credentials Saving System!";
+        welc = new JLabel(a);
+        welc.setFont(new Font("Arial", Font.BOLD, 60));
+        welc.setBounds(50, 60, 800, 80);
+        welc.setForeground(Color.decode("#2E1AE2"));
+        frame.add(welc);
 
 
 
