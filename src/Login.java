@@ -140,6 +140,9 @@ public class Login extends JFrame implements ActionListener {
             return false;
         }
     }
+
+
+
     public String user_email(){
         return this.e_email.getText();
     }
@@ -167,30 +170,18 @@ public class Login extends JFrame implements ActionListener {
             if (e.getSource()==login){
                 if (check()){
                     JOptionPane.showMessageDialog(null,"Sucessful Login!");
+                    String em = e_email.getText();
+                    String pass= e_password.getText();
+
+
+
                     frame.setVisible(false);
-                    new Dashboard();
+                    new Dashboard(em,pass);
+
 
 
 
                 }
-
-//                for (int row =0; rr<=7;)
-
-
-//                    ResultSet result=st.executeQuery("SELECT email ms.customer_details WHERE email="+c+';');
-//
-//                if(a!="" && b!="" && c!="" && d!="" && add_e!="" && f!="")
-//                {
-//                    if(result==null)
-//                    {
-//                        st.executeUpdate("INSERT INTO customer_details(fullname,username,email,password,address,contact) VALUES("+a+','+b+','+c+','+f+','+add_e+','+d+';');
-//                        JOptionPane.showMessageDialog(null,"Registered successfully!","Success",JOptionPane.INFORMATION_MESSAGE);
-//                    }
-//                    else if(c==result.getString(1));
-//                    {
-//                        JOptionPane.showMessageDialog(null,"Entry Already Exists!","Failed!",JOptionPane.INFORMATION_MESSAGE);
-//                    }
-//                }
 
             }
             else if(e.getSource()==sign_up){

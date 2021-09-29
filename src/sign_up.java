@@ -202,9 +202,6 @@ public class sign_up extends JFrame implements ActionListener {
                                 checkUser.setString(1,c);
                                 ResultSet resultSet = checkUser.executeQuery();
 
-//                                String check = "SELECT email from user_info WHERE email=" + c ;
-//                                ResultSet result = c2.s.executeQuery(check);
-
                                 if (!resultSet.next()) {
                                     PreparedStatement addUser = connection.prepareStatement("INSERT INTO user_info(Fullname,username,email,contactno,adress,password) VALUES(?,?,?,?,?,?)");
                                     addUser.setString(1,a);
