@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Login" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="Login" />
-    <module name="Bank_Management_System" />
+    <module name="User_Detail_Credential_Recording_System" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
